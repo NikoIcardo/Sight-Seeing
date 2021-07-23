@@ -30,7 +30,7 @@ React Third Party Libraries
 
 
 
-*Portions of the project were written by Max the instructor of the site. However, a majority of the code was written following the course lessons. Each file written by me will*
+*Portions of the project were written by Max the instructor of the site. However, the majority of the code was written following the course lessons. Each file written by me will*
 contain my name at the top in comments. 
 
 
