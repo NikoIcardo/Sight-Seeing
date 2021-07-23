@@ -6,6 +6,7 @@ As a User, you may upload photos of different sights and places you've taken. Yo
 The project is built using the MERN stack. 
 
 React overview: 
+
 Two Way Binding 
 Hooks 
 - useEffect
