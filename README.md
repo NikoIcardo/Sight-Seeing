@@ -1,2 +1,2 @@
 # SightSeeing.com
-A Social Network Project built for Maximilian Schwarzmüller's MERN Fullstack Course
+A social network project built for Maximilian Schwarzmüller's MERN Fullstack Course
