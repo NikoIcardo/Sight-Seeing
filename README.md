@@ -8,6 +8,7 @@ The project is built using the MERN stack.
 React overview: 
 
 Two Way Binding 
+
 Hooks 
 - useEffect
 - useState
