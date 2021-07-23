@@ -1,8 +1,6 @@
 # SightSeeing.com
 *Please note that the name is not an actual live site at the moment.* 
 
-Portions of the project were written by Max the instructor of the site. However, a majority of the code was written following the course lessons. Each file written by me will 
-contain my name at the top in comments. 
 
 A social network project built following Maximilian Schwarzmüller's MERN Fullstack Course
 
@@ -29,6 +27,11 @@ React DOM
 React Third Party Libraries 
 - React Router DOM 
 - React Transition Group 
+
+
+
+*Portions of the project were written by Max the instructor of the site. However, a majority of the code was written following the course lessons. Each file written by me will*
+contain my name at the top in comments. 
 
 
 
