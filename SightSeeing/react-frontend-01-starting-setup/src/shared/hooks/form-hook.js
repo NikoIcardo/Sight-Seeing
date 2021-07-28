@@ -1,17 +1,17 @@
 /*Niko Icardo 
 7/20/21*/ 
 
-import { useCallback, useReducer } from "react";
+import { useCallback, useReducer } from 'react';
 
 const formReducer = (state, action) => {
   switch (action.type) {
-    case "INPUT_CHANGE":
+    case 'INPUT_CHANGE':
       let formIsValid = true;
       for (const inputId in state.inputs) {
         if (!state.inputs[inputId]){
           continue; // skip if the property is undefined
         }
-        if (inputId === action.inputsId) {
+        if (inputId === action.inputId) {
           formIsValid = formIsValid && action.isValid;
         } else {
           formIsValid = formIsValid && state.inputs[inputId].isValid;
@@ -21,7 +21,7 @@ const formReducer = (state, action) => {
         ...state,
         inputs: {
           ...state.inputs,
-          [action.inputId]: { value: action.value, isValid: action.isValid },
+          [action.inputId]: { value: action.value, isValid: action.isValid }
         },
         isValid: formIsValid,
       };
@@ -30,7 +30,7 @@ const formReducer = (state, action) => {
      return {
       inputs: action.inputs, 
       isValid: action.formIsValid
-     }
+     };
     default:
       return state;
   }
@@ -47,10 +47,10 @@ export const useForm = (initialInputs, initialFormValidity) => {
   each time the NewPlace component is rendered by react. */
   const inputHandler = useCallback((id, value, isValid) => {
     dispatch({
-      type: "INPUT_CHANGE",
+      type: 'INPUT_CHANGE',
       value: value,
       isValid: isValid,
-      inputId: id,
+      inputId: id
     });
   }, []);
 

@@ -21,13 +21,13 @@ const Auth = () => {
   const [formState, inputHandler, setFormData] = useForm(
     {
       email: {
-        value: "",
+        value: '',
         isValid: false,
       },
       password: {
-        value: "",
+        value: '',
         isValid: false,
-      },
+      }
     },
     false
   );
@@ -37,7 +37,7 @@ const Auth = () => {
       setFormData({
         ...formState.inputs,
         name: undefined
-      }, formState.inputs.email.isValid && formState.inputs.password.isValid)
+      }, formState.inputs.email.isValid && formState.inputs.password.isValid);
     } else {
       setFormData({
         ...formState.inputs, 
@@ -45,18 +45,19 @@ const Auth = () => {
           value: '', 
           isValid: false
         }
-      }, false)
+      }, false);
     }
     setIsLoginMode(prevMode => !prevMode);
   };
 
-  const authSubmitHandler = (event) => {
+  const authSubmitHandler = event => {
     event.preventDefault();
     console.log(formState.inputs);
     auth.login();
   };
 
   return (
+    
     <form className="place-form" onSubmit={authSubmitHandler}>
       <h2>Login Required</h2>
       <hr />
@@ -69,8 +70,6 @@ const Auth = () => {
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Please enter a name. "
           onInput={inputHandler}
-          initialValue=""
-          initialValidity={false}
         />
         }
       <Input
@@ -81,8 +80,6 @@ const Auth = () => {
         validators={[VALIDATOR_EMAIL()]}
         errorText="Please enter a valid email address."
         onInput={inputHandler}
-        initialValue=""
-        initialValidity={false}
       />
 
       <Input
@@ -93,16 +90,16 @@ const Auth = () => {
         validators={[VALIDATOR_MINLENGTH(5)]}
         errorText="Please enter a valid password, at least six characters."
         onInput={inputHandler}
-        initialValue=""
-        initialValidity={false}
       />
       <Button type="submit" disabled={!formState.isValid}>
-        {isLoginMode ? 'LOGIN': 'SIGNUP'}
+        {isLoginMode ? 'LOGIN' : 'SIGNUP'}
       </Button>
-      <Button exact inverse onClick={switchModeHandler}>
-        Switch to {!isLoginMode ? 'LOGIN': 'SIGNUP'}
+      
+      <Button inverse onClick={switchModeHandler}>
+        Switch to {!isLoginMode ? 'LOGIN' : 'SIGNUP'}
       </Button>
     </form>
+    
   );
 };
 

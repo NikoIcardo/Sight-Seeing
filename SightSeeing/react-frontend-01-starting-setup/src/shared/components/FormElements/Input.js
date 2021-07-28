@@ -1,25 +1,26 @@
 /*Niko Icardo
 7/14/21*/
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect } from 'react';
 //useReducer allows you to use more complex state management
 
-import { validate } from "../../util/validators";
-import "./Input.css";
+import { validate } from '../../util/validators';
+import './Input.css';
 
 //reducer
 const inputReducer = (state, action) => {
   switch (action.type) { 
-    case "CHANGE":
+    case 'CHANGE':
       return {
         ...state,
         value: action.val,
         isValid: validate(action.val, action.validators),
       };
-    case "TOUCH":
+    case 'TOUCH': {
       return {
         ...state,
         isTouched: true,
-      };
+      }
+    }
     default:
       return state;
   }
