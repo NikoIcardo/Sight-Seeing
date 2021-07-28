@@ -1,19 +1,21 @@
 /* Niko Icardo 
 7/25/21 */
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
-import Input from "../../shared/components/FormElements/Input";
-import Button from "../../shared/components/FormElements/Button";
+import Input from '../../shared/components/FormElements/Input';
+import Button from '../../shared/components/FormElements/Button';
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE
-} from "../../shared/util/validators";
-import { useForm } from "../../shared/hooks/form-hook";
-import "./Auth.css";
+} from '../../shared/util/validators';
+import { useForm } from '../../shared/hooks/form-hook';
+import { AuthContext } from '../../shared/context/auth-context';
+import './Auth.css';
 
 const Auth = () => {
+  const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
 
   const [formState, inputHandler, setFormData] = useForm(
@@ -51,6 +53,7 @@ const Auth = () => {
   const authSubmitHandler = (event) => {
     event.preventDefault();
     console.log(formState.inputs);
+    auth.login();
   };
 
   return (
@@ -87,7 +90,7 @@ const Auth = () => {
         element="input"
         type="text"
         label="Password"
-        validators={[VALIDATOR_MINLENGTH(6)]}
+        validators={[VALIDATOR_MINLENGTH(5)]}
         errorText="Please enter a valid password, at least six characters."
         onInput={inputHandler}
         initialValue=""
