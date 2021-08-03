@@ -53,7 +53,7 @@ const Auth = () => {
   const authSubmitHandler = event => {
     event.preventDefault();
     console.log(formState.inputs);
-    auth.login();
+    auth.login()
   };
 
   return (
@@ -95,7 +95,7 @@ const Auth = () => {
         {isLoginMode ? 'LOGIN' : 'SIGNUP'}
       </Button>
       
-      <Button inverse onClick={switchModeHandler}>
+      <Button inverse type="button" onClick={switchModeHandler}>
         Switch to {!isLoginMode ? 'LOGIN' : 'SIGNUP'}
       </Button>
     </form>
