@@ -32,7 +32,7 @@ React Third Party Libraries
 
 
 
-*Portions of the project were written by Max the instructor of the course mentioned above. However, the majority of the code was written by me following the course lessons. Each file written by me will contain my name at the top in comments.*
+*Portions of the project were written by Max the instructor of the course mentioned above, such as various CSS files. However, the majority of the code was written by me following the course lessons. Each file written by me will contain my name at the top in comments.*
 
 
 
