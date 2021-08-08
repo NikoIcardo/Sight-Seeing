@@ -9,7 +9,7 @@ const Users = () => {
             name: 'Niko Icardo', 
             image: 
                 "https://venngage-wordpress.s3.amazonaws.com/uploads/2018/09/Colorful-Geometric-Simple-Background-Image.jpg", 
-            places: '3'
+            places: '1'
         }
     ]; 
 
