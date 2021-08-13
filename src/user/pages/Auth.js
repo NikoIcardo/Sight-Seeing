@@ -12,11 +12,17 @@ import {
 } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
 import { AuthContext } from '../../shared/context/auth-context';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner'; 
+import  ErrorModal  from '../../shared/components/UIElements/ErrorModal';
+import Card from '../../shared/components/UIElements/Card';
 import './Auth.css';
+
 
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const [isLoading, setIsLoading] = useState(false); 
+  const [error, setError] = useState();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -32,7 +38,7 @@ const Auth = () => {
     false
   );
 
-  const switchModeHandler = () => {
+  const switchModeHandler = () => { 
     if (!isLoginMode) {
       setFormData({
         ...formState.inputs,
@@ -57,6 +63,7 @@ const Auth = () => {
 
     } else {
       try {
+        setIsLoading(true); 
         const response = await fetch('http://localhost:5000/api/users/signup', {
           method: 'POST',
           headers: {
@@ -71,58 +78,62 @@ const Auth = () => {
 
         const responseData = response.json();
         console.log(responseData);
+        setIsLoading(false);
+        auth.login();
       } catch (err) {
-        console.log(err);
+        setIsLoading(false);
+        setError(err.message || 'Something went wrong, please try again.');
+        console.log(error);
       }
     }
-    
-    auth.login();
   };
 
   return (
     
-    <form className="place-form" onSubmit={authSubmitHandler}>
+    <Card className="authentication">
       <h2>Login Required</h2>
       <hr />
-      {!isLoginMode &&  
-      <Input
-          id="name"
+      <form onSubmit={authSubmitHandler}>
+        {isLoading && <LoadingSpinner asOverlay/>}
+        {!isLoginMode &&  
+        <Input
+            id="name"
+            element="input"
+            type="text"
+            label="Your Name"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter a name. "
+            onInput={inputHandler}
+          />
+        }
+        <Input
+          id="email"
           element="input"
           type="text"
-          label="Your Name"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a name. "
+          label="Email"
+          validators={[VALIDATOR_EMAIL()]}
+          errorText="Please enter a valid email address."
           onInput={inputHandler}
         />
-        }
-      <Input
-        id="email"
-        element="input"
-        type="text"
-        label="Email"
-        validators={[VALIDATOR_EMAIL()]}
-        errorText="Please enter a valid email address."
-        onInput={inputHandler}
-      />
-
-      <Input
-        id="password"
-        element="input"
-        type="text"
-        label="Password"
-        validators={[VALIDATOR_MINLENGTH(5)]}
-        errorText="Please enter a valid password, at least six characters."
-        onInput={inputHandler}
-      />
-      <Button type="submit" disabled={!formState.isValid}>
-        {isLoginMode ? 'LOGIN' : 'SIGNUP'}
-      </Button>
-      
-      <Button inverse type="button" onClick={switchModeHandler}>
-        Switch to {!isLoginMode ? 'LOGIN' : 'SIGNUP'}
-      </Button>
-    </form>
-    
+  
+        <Input
+          id="password"
+          element="input"
+          type="text"
+          label="Password"
+          validators={[VALIDATOR_MINLENGTH(5)]}
+          errorText="Please enter a valid password, at least 6 characters."
+          onInput={inputHandler}
+        />
+        <Button type="submit" disabled={!formState.isValid}>
+          {isLoginMode ? 'LOGIN' : 'SIGNUP'}
+        </Button>
+        
+        <Button inverse type="button" onClick={switchModeHandler}>
+          Switch to {!isLoginMode ? 'LOGIN' : 'SIGNUP'}
+        </Button>
+      </form>
+    </Card>
   );
 };
 
