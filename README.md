@@ -1,4 +1,4 @@
-# SightSeeing.com (Just a sample name) 
+# Sight Seeing 
 Live: https://admiring-austin-7c036d.netlify.app/ (Netlify Auto Generated Domain Name)
 
 *Currenly in development. API development under repository 'REST API for Sight Seeing'.*
