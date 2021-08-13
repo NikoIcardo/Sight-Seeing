@@ -1,7 +1,10 @@
 # Sight Seeing 
 Live: https://admiring-austin-7c036d.netlify.app/ (Netlify Auto Generated Domain Name)
 
+*No Login currently available as the backend is currently being connected to the frontend.*
+
 *Currenly in development. API development under repository 'REST API for Sight Seeing'.*
+
 
 A social network project built following Maximilian Schwarzmüller's MERN Fullstack Course
 
