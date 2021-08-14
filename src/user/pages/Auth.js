@@ -99,18 +99,17 @@ const Auth = () => {
           })
         });
 
-        const responseData = response.json();
+        const responseData = await response.json();
+        const responseMessage = await responseData.message; 
         // the following is a response object property that is true if there is a 200ish status code. 
         if (!response.ok) {
-          throw new Error(responseData.message);
+          throw new Error(responseMessage);
         }
-        console.log(responseData);
         setIsLoading(false);
         auth.login();
       } catch (err) {
         setIsLoading(false);
         setError(err.message || 'Something went wrong, please try again.');
-        console.log(error);
       }
     }
   };
