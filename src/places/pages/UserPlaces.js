@@ -1,41 +1,50 @@
 //Niko
-import React from 'react'; 
+
+import React, { useEffect, useState } from 'react'; 
 import { useParams } from 'react-router-dom';
 
 import PlaceList from '../components/PlaceList'; 
-
-
-const DUMMY_PLACES = [
-    {
-        id: 'p1', 
-        title: 'Empire State Building', 
-        description: 'One of the most famous skyscrapers in the world.', 
-        imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg', 
-        address: '20 W 34th St, New York, NY 10001', 
-        location: {
-            lat: 40.784405, 
-            lng: -73.9878584
-        },
-        creator: 'u1'
-    },
-    {
-        id: 'p2', 
-        title: 'Emp. State Building', 
-        description: 'One of the most famous skyscrapers in the world.', 
-        imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Empire_State_Building_%28aerial_view%29.jpg/250px-Empire_State_Building_%28aerial_view%29.jpg', 
-        address: '20 W 34th St, New York, NY 10001', 
-        location: {
-            lat: 40.784405, 
-            lng: -73.9878584
-        },
-        creator: 'u2'
-    }
-]; 
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal'; 
+import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const UserPlaces = () => {
-    const userId = useParams().userId; // allows us to grab dynamic segments of URLs
-    const loadedPlaces = DUMMY_PLACES.filter(place => place.creator === userId);
-    return <PlaceList items={loadedPlaces}/>; 
+  const {isLoading, error, sendRequest, clearError } = useHttpClient(); 
+  const [loadedPlaces, setLoadedPlaces] = useState([]);
+  const userId = useParams().userId; // allows us to grab dynamic segments of URLs
+
+  useEffect(() => {
+    const getUserPlaces = async () => {
+      try{
+        const userPlaces = await sendRequest('http://localhost:5000/api/places/user/' + userId);
+        await setLoadedPlaces(userPlaces.places); 
+      } catch(err){
+        console.log(err.message);
+      }  
+    }
+    getUserPlaces();
+  }
+  ,[sendRequest, userId]);
+  
+  const configuredPlaces = loadedPlaces.map(place => ({
+      id: place.id, 
+      imageURL: place.image,
+      title: place.title, 
+      description: place.description, 
+      address: place.address, 
+      location: {
+        lat: place.location.lat, 
+        lng: place.location.lng
+      }, 
+      creator: place.creator
+    })
+  );
+
+  return <React.Fragment >
+    <ErrorModal error={error} onClear={clearError}/>
+    {isLoading && LoadingSpinner}
+    {loadedPlaces && <PlaceList items={configuredPlaces}/>}
+  </React.Fragment> 
 }
 
 export default UserPlaces; 
