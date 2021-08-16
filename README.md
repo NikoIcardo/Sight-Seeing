@@ -22,9 +22,11 @@ Hooks
 - useReducer
 - useCallBack 
 - useContext
+- useRef
 
 Custom Hooks 
 - useForm 
+- useHttpClient
 
 React DOM 
 - Portals 
