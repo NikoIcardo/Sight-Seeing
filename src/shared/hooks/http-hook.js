@@ -23,17 +23,30 @@ export const useHttpClient = () => {
         signal: httpAbortCtrl.signal
       });
   
+      console.log('here');
+
       const responseData = await response.json();
+
+      console.log('here1');
 
       activeHttpRequests.current = activeHttpRequests.current.filter(
         reqCtrl => reqCtrl !== httpAbortCtrl
       );
 
+      console.log('here2');
+
       if (!response.ok) {
         throw new Error(responseData.message);
       }
       
+      console.log('here3');
+
       setIsLoading(false);
+      console.log('here4');
+
+      if(method === 'DELETE'){
+        console.log('delete');
+      }
       
       return responseData;
     } catch (err) {
