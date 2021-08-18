@@ -43,13 +43,18 @@ const Auth = () => {
     if (!isLoginMode) {
       setFormData({
         ...formState.inputs,
-        name: undefined
+        name: undefined,
+        image: undefined
       }, formState.inputs.email.isValid && formState.inputs.password.isValid);
     } else {
       setFormData({
         ...formState.inputs, 
         name: {
           value: '', 
+          isValid: false
+        }, 
+        image:{
+          value: null, 
           isValid: false
         }
       }, false);
@@ -59,6 +64,8 @@ const Auth = () => {
 
   const authSubmitHandler =  async event => {
     event.preventDefault();
+
+    console.log(formState.inputs);
 
     if(isLoginMode){
       try {
@@ -79,6 +86,7 @@ const Auth = () => {
       try {
         const data = await sendRequest('http://localhost:5000/api/users/signup/', 'POST', JSON.stringify({
             name: formState.inputs.name.value, 
+            //image: formState.inputs.image.value,
             email: formState.inputs.email.value, 
             password: formState.inputs.password.value
           }), 
@@ -110,7 +118,7 @@ const Auth = () => {
               onInput={inputHandler}
             />
           }
-          {!isLoginMode && <ImageUpload id="image" center />}
+          {!isLoginMode && <ImageUpload id="image" center onInput={inputHandler}/>}
           <Input
             id="email"
             element="input"
