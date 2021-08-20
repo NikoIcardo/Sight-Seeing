@@ -11,11 +11,10 @@ export const useHttpClient = () => {
 
   const sendRequest = useCallback( 
     async (url, method = 'GET', body =  null, headers = {}) => {
-    try {
       setIsLoading(true); 
       const httpAbortCtrl = new AbortController(); 
       activeHttpRequests.current.push(httpAbortCtrl);
-
+    try {
       const response = await fetch(url, {
         method, 
         body, 
@@ -51,6 +50,7 @@ export const useHttpClient = () => {
       return responseData;
     } catch (err) {
       setError(err.message);
+      console.log(err);
       setIsLoading(false);
       throw err; 
     }
