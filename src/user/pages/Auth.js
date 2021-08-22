@@ -124,8 +124,7 @@ const Auth = () => {
               onInput={inputHandler}
             />
           )}
-          {!isLoginMode && <ImageUpload id="image" center onInput={inputHandler} />}
-          {!isLoginMode && !formState.inputs.image.isValid && <p>isnt valid</p>}
+          {!isLoginMode && <ImageUpload id="image" center onInput={inputHandler} text="Please Select a Profile Image." />}
           <Input
             id="email"
             element="input"
