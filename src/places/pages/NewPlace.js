@@ -52,7 +52,6 @@ const NewPlace = () => {
       formData.append('image', formState.inputs.image.value); 
       formData.append('description', formState.inputs.description.value); 
       formData.append('address', formState.inputs.address.value); 
-      formData.append('creator', auth.userId); 
 
       await sendRequest(
         'http://localhost:5000/api/places/',
@@ -69,7 +68,7 @@ const NewPlace = () => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <form className="place-form" onSubmit={placeSubmitHandler}>
-        {isLoading && <LoadingSpinner  asOverlay/>}
+        {isLoading && <LoadingSpinner asOverlay />}
         <Input
           id="title"
           element="input"
