@@ -16,7 +16,7 @@ const UserPlaces = () => {
     const getUserPlaces = async () => {
       try {
         const userPlaces = await sendRequest(
-          `http://localhost:5000/api/places/user/${userId}`
+          `${process.env.REACT_APP_BACKEND_URL}/places/user/${userId}`
         );
         await setLoadedPlaces(userPlaces.places);
       } catch (err) {
@@ -38,8 +38,8 @@ const UserPlaces = () => {
   return (
     <React.Fragment>
       {isLoading && (
-        <div>
-          <LoadingSpinner />
+        <div className="center">
+          <LoadingSpinner/>
         </div>
       )}
       {!isLoading && loadedPlaces && <PlaceList items={loadedPlaces} onDeletePlace={placeDeletedHandler} />}

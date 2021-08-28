@@ -12,7 +12,7 @@ const Users = () => {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const response = await sendRequest('http://localhost:5000/api/users'); // GET request by default and has no body because we are not sending any data.
+        const response = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/users'); // GET request by default and has no body because we are not sending any data.
         await setLoadedUsers(response.users);
       } catch (err) {}
     };
